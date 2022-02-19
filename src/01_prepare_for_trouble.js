@@ -37,7 +37,18 @@ const examplePokemon = require("../data/poke");
   'Dratini',    'Dragonair',  'Dragonite',  'Mewtwo'
 ];
  */
-function getAllPokemonNames() {};
+function getAllPokemonNames(examplePokemon) {
+
+  //create a variable to store pokemon names
+  let pokemonNames = [];
+
+  //loop through the array and pull out the name
+   for(let pokemon of examplePokemon){
+    pokemonNames.push(pokemon.name)
+  }
+
+  return pokemonNames;
+};
 
 /**
  * getHighestAttackStatScore()
@@ -50,7 +61,27 @@ function getAllPokemonNames() {};
  *  getHighestAttackStatScore(pokemon);
  *  //> 134
  */
-function getHighestAttackStatScore() {};
+function getHighestAttackStatScore(examplePokemon) {
+  //create variable to hold pokemon stats value
+ 
+  let highestAttack = 0;
+
+  //loop through the pokemon array and then loop through the stats array to compare attack stats to temp var
+  //replace temp var with new highest
+  for(let i = 0; i < examplePokemon.length; i++){
+
+    for(let j = 0; j < examplePokemon[i].stats.length; j++){
+
+      if(examplePokemon[i].stats[j].category === 'attack'){
+        
+        if(examplePokemon[i].stats[j].value > highestAttack){
+          highestAttack = examplePokemon[i].stats[j].value;
+        } 
+      }
+    }
+  }
+   return highestAttack;
+};
 
 /**
  * getAverageTotalStatScore()
@@ -63,7 +94,43 @@ function getHighestAttackStatScore() {};
  *  getAverageTotalStatScore(pokemon);
  *  //> 407.22
  */
-function getAverageTotalStatScore() {}
+function getAverageTotalStatScore(examplePokemon) {
+  if(examplePokemon.length === 0){
+    return 0;
+  }
+
+  //loop through the pokemon array, pull out the 'total' stat value and push into new array
+  //to get the average - add all of the numbers in the new array and divide by .length
+  let totalStatValues = [];
+
+  for(let i = 0; i < examplePokemon.length; i++){
+    for(let j = 0; j < examplePokemon[i].stats.length; j++){
+      if(examplePokemon[i].stats[j].category === 'total'){
+        totalStatValues.push(examplePokemon[i].stats[j].value)
+      }
+    }
+  }
+
+  //create sum variable
+  let statSum = 0;
+
+  for(let i = 0; i < totalStatValues.length; i++){
+    statSum += totalStatValues[i]
+  }
+
+  return statSum / totalStatValues.length
+}
+
+//Kalilah's example
+// if (!pokemon.length) {
+//   return 0;
+// }
+// let total = 0;
+// for (let i = 0; i < pokemon.length; i++) {
+//   total += pokemon[i].stats[0].value;
+// }
+// return total / pokemon.length;
+// }
 
 
 module.exports = {

@@ -35,7 +35,21 @@ const exampleWeaknesses = require("../data/weaknesses");
  *  filterByType(pokemon, "Shadow")
  *  //> [];
  */
-function filterByType() {}
+function filterByType(examplePokemon, type = 'Normal') {
+  //create a variable to hold empty []; return it
+  let pokemonType = [];
+
+  //loop through the pokemon array and then loop through the types array to see if the given type matches
+  for(let i = 0; i < examplePokemon.length; i++){
+    for(let oneType of examplePokemon[i].type){
+      //should be case-insensitive
+      if(oneType.toLowerCase() === type.toLowerCase()){
+        pokemonType.push(examplePokemon[i])
+      }
+    }
+  }
+  return pokemonType;
+}
 
 /**
  * getPokemonNamesMostEffectiveAgainstType()
@@ -56,7 +70,48 @@ function filterByType() {}
     *  getPokemonNamesMostEffectiveAgainstType(pokemon, weaknesses, "copyright infringement");
  *  //> [];
  */
-function getPokemonNamesMostEffectiveAgainstType() {}
+function getPokemonNamesMostEffectiveAgainstType(examplePokemon, weaknesses, type) {
+  //should return an error message if type is not valid
+  if(!weaknesses[type]){
+    return `No Pokemon found of type: '${type}'.`
+  }
+
+  let strongPokemon = [];
+
+  //loop through pokemon array
+  for(let i = 0; i < examplePokemon.length; i++){
+    //loop through pokemon.type array 
+    for(let j = 0; j < examplePokemon[i].type.length; j++){
+      if(weaknesses[type].includes(examplePokemon[i].type[j])){
+        strongPokemon.push(examplePokemon[i].name)
+      }
+    }
+  }
+  return strongPokemon;
+}
+
+// let weaknessesArray = [];
+
+//   if (weaknesses.hasOwnProperty(type)) {
+//     let specifiedEnemyType = weaknesses[type];
+
+//     for (let i = 0; i < specifiedEnemyType.length; i++) {
+//       for (let j = 0; j < pokemon.length; j++) {
+//         if (
+//           pokemon[j].type.includes(specifiedEnemyType[i]) &&
+//           !weaknessesArray.includes(pokemon[j].name)
+//         ) {
+//           weaknessesArray.push(pokemon[j].name);
+//         }
+//       }
+//     }
+//   } else {
+//     return `No Pokemon found of type: '${type}'.`;
+//   }
+//   console.log(weaknessesArray);
+//   return weaknessesArray;
+// }
+
 
 module.exports = {
     filterByType,

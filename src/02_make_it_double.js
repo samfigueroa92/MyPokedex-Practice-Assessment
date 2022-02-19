@@ -35,8 +35,25 @@ const examplePokemon = require("../data/poke");
         Dragon: 3
     };
  */
-function countByType() {}
+function countByType(examplePokemon) {
+  //create var to hold temp object
+  let pokeObj = {};
 
+  //loop through pokemon array to access type
+  for(let i = 0; i < examplePokemon.length; i++){
+    //loop through type array and assign element as a key
+    for(let j = 0; j < examplePokemon[i].type.length; j++){
+      //if the key does not already exist in the object create it and add 1
+      if(!pokeObj[examplePokemon[i].type[j]]){
+        pokeObj[examplePokemon[i].type[j]] = 1;
+      } else{
+        //if it does exist already add one every time it shows up
+        pokeObj[examplePokemon[i].type[j]] += 1;
+      }
+    }
+  }
+return pokeObj;
+}
 
 /**
  * findByNumber()
@@ -52,7 +69,16 @@ function countByType() {}
       // Hitmonlee
     };
  */
-function findByNumber() {};
+function findByNumber(examplePokemon, number) {
+ let pokemonObj = null;
+
+ for(let i = 0; i < examplePokemon.length; i++){
+   if(examplePokemon[i].national_number === number){
+     pokemonObj = examplePokemon[i];
+   } 
+ }
+ return pokemonObj;
+};
 
 
 module.exports = {
